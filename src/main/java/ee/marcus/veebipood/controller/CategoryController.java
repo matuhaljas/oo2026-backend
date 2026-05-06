@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class CategoryController {
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -19,13 +21,14 @@ public class CategoryController {
 
     @DeleteMapping("categories/{id}")
     public List<Category> deleteCategory(@PathVariable Long id){
-        categoryRepository.deleteById(id);
-        return categoryRepository.findAll();
+        categoryRepository.deleteById(id); // kustutan
+        return categoryRepository.findAll(); // uuenenud seis
     }
 
     @PostMapping("categories")
     public List<Category> addCategory(@RequestBody Category category){
-        categoryRepository.save(category);
-        return categoryRepository.findAll();
+        categoryRepository.save(category); // siin salvestab
+        return categoryRepository.findAll(); // siin on uuenenud seis
     }
+
 }
