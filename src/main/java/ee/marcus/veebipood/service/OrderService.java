@@ -36,7 +36,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final PersonRepository personRepository;
     private final ProductRepository productRepository;
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public PaymentUrl makePayment(Long orderId, double sum) {
         EveryPayBody body = new EveryPayBody();
