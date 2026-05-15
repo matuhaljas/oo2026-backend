@@ -11,7 +11,7 @@ import ee.marcus.veebipood.entity.Product;
 import ee.marcus.veebipood.repository.OrderRepository;
 import ee.marcus.veebipood.repository.PersonRepository;
 import ee.marcus.veebipood.repository.ProductRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OrderService {
 
     // @Autowired --> Dependency Injection
@@ -36,7 +36,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final PersonRepository personRepository;
     private final ProductRepository productRepository;
-    private final RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
 
     public PaymentUrl makePayment(Long orderId, double sum) {
         EveryPayBody body = new EveryPayBody();
@@ -44,7 +44,7 @@ public class OrderService {
         body.setNonce("165784a" + ZonedDateTime.now() + Math.random()); // turvaelement, et ei läheks topeltpäring
         body.setTimestamp(ZonedDateTime.now().toString()); // turvaelement. pluss miinus 5 minutit
         body.setAmount(sum); // max 7000 eurot on default
-        body.setOrder_reference("marcus" + orderId); // kui on makstud, siis teist korda maksma minna ei saa
+        body.setOrder_reference("mihkel" + orderId); // kui on makstud, siis teist korda maksma minna ei saa
         body.setCustomer_url("http://err.ee"); // kuhu tagasi suunatakse. localhosti ei saa
         body.setApi_username("e36eb40f5ec87fa2"); // turvaelement. Headeris olemas. aga peab ühtima sellega mis on headeris
 
